@@ -145,7 +145,9 @@ function Component({ count, name }: { count: string; name: string }) {
   return (
     <div className="flex flex-col items-start gap-1">
       <div className="text-[#6b7280]">{name}</div>
-      <div className="text-2xl font-bold text-[#374151]">{count}</div>
+      <div className="font-bold text-[#374151] text-sm sm:text-2xl">
+        {count}
+      </div>
     </div>
   );
 }

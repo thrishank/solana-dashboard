@@ -59,18 +59,18 @@ export default function TransactionActivity() {
   }
 
   return (
-    <Card className="shadow-lg rounded-lg w-full max-w-lg">
+    <Card className="shadow-lg rounded-lg">
       <CardHeader className="flex items-center justify-between">
         <CardTitle className="text-[#374151] font-bold">
           Transaction Activity
         </CardTitle>
         <ActivityIcon className="w-6 h-6 text-[#6b7280]" />
       </CardHeader>
+
       <CardContent>
         <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={data}>
+          <LineChart data={data} className="aspect-[16/9]">
             <XAxis dataKey="month" />
-            <YAxis />
             <Tooltip />
             <Line
               type="monotone"

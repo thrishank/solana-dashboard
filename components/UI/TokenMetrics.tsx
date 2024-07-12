@@ -67,7 +67,6 @@ async function getData(): Promise<TokenData> {
 export default function Token(): JSX.Element {
   const [tokenData, setTokenData] = useState<TokenData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchData = () => {
@@ -77,9 +76,7 @@ export default function Token(): JSX.Element {
           setIsLoading(false);
         })
         .catch((err) => {
-          setError(
-            err instanceof Error ? err : new Error("An unknown error occurred")
-          );
+          console.log(err);
           setIsLoading(false);
         });
     };
@@ -91,7 +88,7 @@ export default function Token(): JSX.Element {
   }, []);
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+
   if (!tokenData) return <div>No data available</div>;
 
   const {
@@ -146,7 +143,9 @@ function Component({ count, name }: ComponentProps): JSX.Element {
   return (
     <div className="flex flex-col items-start gap-1">
       <div className="text-[#6b7280]">{name}</div>
-      <div className="text-2xl font-bold text-[#374151]">{count}</div>
+      <div className="font-bold text-[#374151]  text-sm sm:text-2xl">
+        {count}
+      </div>
     </div>
   );
 }
