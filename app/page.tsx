@@ -1,19 +1,17 @@
-import { clusterApiUrl, Connection, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import Navbar from "@/components/UI/Navbar";
+import Network from "@/components/UI/Network";
+import Token from "@/components/UI/TokenMetrics";
+import Transaction from "@/components/UI/transactions";
 
 export default async function Home() {
-  const connect = new Connection(clusterApiUrl("mainnet-beta"));
-
-  const supply = await connect.getSupply();
-  console.log(supply.value.total / LAMPORTS_PER_SOL, "SOL");
-
-  const slot = await connect.getSlot();
-  console.log(slot);
-
-  const epcoh = await connect.getEpochInfo();
-  console.log(epcoh);
   return (
-    <div>
-      <h1>Solana Explorer</h1>
+    <div className="flex flex-col min-h-screen bg-[#f5f5f5]">
+      {/* <Navbar />
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+        <Network />
+        <Token />
+      </div> */}
+      <Transaction />
     </div>
   );
 }
