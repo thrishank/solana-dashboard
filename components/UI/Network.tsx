@@ -1,9 +1,21 @@
+"use client";
+
 import { ActivityIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../HomeCard";
 import { SYSVAR_CLOCK_PUBKEY } from "@solana/web3.js";
 import { connect } from "@/lib/connect";
+import { useEffect, useState } from "react";
 
-const getData = async () => {
+interface NetworkData {
+  totalTransactions: string;
+  totalAccounts: string;
+  totalValidators: string;
+  blockHeight: string;
+  currentTps: string;
+  peakTps: string;
+}
+
+const getData = async (): Promise<NetworkData> => {
   const formatter = new Intl.NumberFormat("en", { notation: "standard" });
   try {
     const txCount = await connect.getTransactionCount();
@@ -45,12 +57,48 @@ const getData = async () => {
       peakTps,
     };
   } catch (err) {
-    console.log(err);
-    return {};
+    console.error(err);
+    return {
+      totalTransactions: "",
+      totalAccounts: "",
+      totalValidators: "",
+      blockHeight: "",
+      currentTps: "",
+      peakTps: "",
+    };
   }
 };
 
-export default async function Network() {
+export default function Network() {
+  const [data, setData] = useState<NetworkData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const newData = await getData();
+        setData(newData);
+        setIsLoading(false);
+      } catch (err) {
+        console.error(err);
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+
+    const intervalId = setInterval(fetchData, 10000); // Refresh every 10 seconds
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  if (isLoading) {
+    return <div className="flex justify-center">Loading...</div>;
+  }
+
+  if (!data) {
+    return <div>No data available</div>;
+  }
 
   const {
     totalTransactions,
@@ -59,7 +107,7 @@ export default async function Network() {
     totalValidators,
     currentTps,
     peakTps,
-  } = await getData();
+  } = data;
 
   return (
     <div>
@@ -73,12 +121,11 @@ export default async function Network() {
         <CardContent>
           <div className="grid grid-cols-2 gap-4">
             {totalTransactions && (
-              <Component name="Total Transcations" count={totalTransactions} />
+              <Component name="Total Transactions" count={totalTransactions} />
             )}
             {totalAccounts && (
               <Component name="Total Accounts" count={totalAccounts} />
             )}
-
             {totalValidators && (
               <Component name="Total Validators" count={totalValidators} />
             )}
@@ -86,7 +133,6 @@ export default async function Network() {
               <Component name="Block Height" count={blockHeight} />
             )}
             {currentTps && <Component name="Current TPS" count={currentTps} />}
-
             {peakTps && <Component name="Peak TPS" count={peakTps} />}
           </div>
         </CardContent>

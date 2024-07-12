@@ -1,10 +1,31 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { ActivityIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../HomeCard";
 import { connect } from "@/lib/connect";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import axios from "axios";
 
-async function getData() {
+interface TokenData {
+  circulatingSupply: string;
+  totalSupply: string;
+  SOL_PRICE: string;
+  SOL_CAP: string;
+  allTimeHigh: string;
+  priceChange24h: string;
+}
+
+interface CoinGeckoResponse {
+  market_data: {
+    current_price: { usd: number };
+    market_cap: { usd: number };
+    ath: { usd: number };
+    price_change_percentage_24h: number;
+  };
+}
+
+async function getData(): Promise<TokenData> {
   const formatter = new Intl.NumberFormat("en", { notation: "compact" });
 
   try {
@@ -13,44 +34,75 @@ async function getData() {
     const circulatingSupply = formatter.format(
       supply.value.circulating / LAMPORTS_PER_SOL
     );
-    const totalSuppy = formatter.format(
+    const totalSupply = formatter.format(
       (supply.value.nonCirculating + supply.value.circulating) /
         LAMPORTS_PER_SOL
     );
 
-    const cgResponse = await axios.get(
+    const cgResponse = await axios.get<CoinGeckoResponse>(
       "https://api.coingecko.com/api/v3/coins/solana"
     );
     const data = cgResponse.data;
 
-    const SOL_PRICE = data.market_data.current_price.usd;
+    const SOL_PRICE = data.market_data.current_price.usd.toFixed(2);
     const SOL_CAP = formatter.format(data.market_data.market_cap.usd);
-    const allTimeHigh = data.market_data.ath.usd;
-    const priceChange24h = data.market_data.price_change_percentage_24h;
-    
+    const allTimeHigh = data.market_data.ath.usd.toFixed(2);
+    const priceChange24h =
+      data.market_data.price_change_percentage_24h.toFixed(2) + "%";
+
     return {
       circulatingSupply,
-      totalSuppy,
+      totalSupply,
       SOL_PRICE,
       SOL_CAP,
       allTimeHigh,
       priceChange24h,
     };
   } catch (err) {
-    console.log(err);
-    return {};
+    console.error("Error fetching data:", err);
+    throw err;
   }
 }
 
-export default async function Token() {
+export default function Token(): JSX.Element {
+  const [tokenData, setTokenData] = useState<TokenData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const fetchData = () => {
+      getData()
+        .then((data) => {
+          setTokenData(data);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          setError(
+            err instanceof Error ? err : new Error("An unknown error occurred")
+          );
+          setIsLoading(false);
+        });
+    };
+
+    fetchData();
+
+    const intervalId = setInterval(fetchData, 10000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!tokenData) return <div>No data available</div>;
+
   const {
     circulatingSupply,
-    totalSuppy,
+    totalSupply,
     SOL_PRICE,
     SOL_CAP,
     allTimeHigh,
     priceChange24h,
-  } = await getData();
+  } = tokenData;
+
   return (
     <div>
       <Card className="shadow-lg rounded-lg">
@@ -62,14 +114,18 @@ export default async function Token() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-4">
-            {SOL_PRICE && <Component name="SOL Price" count={SOL_PRICE} />}
+            {SOL_PRICE && (
+              <Component name="SOL Price" count={`$${SOL_PRICE}`} />
+            )}
             {SOL_CAP && <Component name="Market Cap" count={SOL_CAP} />}
             {circulatingSupply && (
               <Component name="Circulating Supply" count={circulatingSupply} />
             )}
-            {totalSuppy && <Component name="Total Supply" count={totalSuppy} />}
+            {totalSupply && (
+              <Component name="Total Supply" count={totalSupply} />
+            )}
             {allTimeHigh && (
-              <Component name="All Time High" count={allTimeHigh} />
+              <Component name="All Time High" count={`$${allTimeHigh}`} />
             )}
             {priceChange24h && (
               <Component name="Change in 24h" count={priceChange24h} />
@@ -81,7 +137,12 @@ export default async function Token() {
   );
 }
 
-function Component({ count, name }: { count: string; name: string }) {
+interface ComponentProps {
+  count: string;
+  name: string;
+}
+
+function Component({ count, name }: ComponentProps): JSX.Element {
   return (
     <div className="flex flex-col items-start gap-1">
       <div className="text-[#6b7280]">{name}</div>
