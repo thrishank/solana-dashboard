@@ -45,13 +45,13 @@ export default function Accounts({
             <TableRow>
               <TableCell>1</TableCell>
               <TableCell>{short(accountKeys[0])}</TableCell>
-              <TableCell>{preBalance[0] / LAMPORTS_PER_SOL}</TableCell>
+              <TableCell>{preBalance![0] / LAMPORTS_PER_SOL}</TableCell>
               <TableCell>
                 <Badge variant="default" className="bg-red-500 text-white">
-                  {(postBalance[0] - preBalance[0]) / LAMPORTS_PER_SOL}
+                  {(postBalance![0] - preBalance![0]) / LAMPORTS_PER_SOL}
                 </Badge>
               </TableCell>
-              <TableCell>{postBalance[0] / LAMPORTS_PER_SOL}</TableCell>
+              <TableCell>{postBalance![0] / LAMPORTS_PER_SOL}</TableCell>
               <TableCell className="flex flex-wrap">
                 <Badge variant="default" className="bg-blue-500 text-white">
                   Fee Payer
@@ -67,13 +67,13 @@ export default function Accounts({
             <TableRow>
               <TableCell>2</TableCell>
               <TableCell>{short(accountKeys[1])}</TableCell>
-              <TableCell>{preBalance[1] / LAMPORTS_PER_SOL}</TableCell>
+              <TableCell>{preBalance![1] / LAMPORTS_PER_SOL}</TableCell>
               <TableCell>
                 <Badge variant="default" className="bg-green-500 text-white">
-                  {(postBalance[1] - preBalance[1]) / LAMPORTS_PER_SOL}
+                  {(postBalance![1] - preBalance![1]) / LAMPORTS_PER_SOL}
                 </Badge>
               </TableCell>
-              <TableCell>{postBalance[1] / LAMPORTS_PER_SOL}</TableCell>
+              <TableCell>{postBalance![1] / LAMPORTS_PER_SOL}</TableCell>
               <TableCell>
                 <Badge variant="default" className="bg-gray-500 text-white">
                   Writable
