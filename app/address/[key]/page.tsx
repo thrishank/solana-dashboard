@@ -23,7 +23,7 @@ import { useEffect, useState } from "react";
 const HELIUS_API_KEY = "20475b23-b7f2-46be-badc-ad4f62baf079";
 const HELIUS_API_URL = `https://api-devnet.helius.xyz/v0/addresses/`;
 
-export default function name({ params }: any) {
+export default function Account({ params }: any) {
   const [accountdata, setAccountData] = useState<AccountInfo<Buffer> | null>();
   const [txData, setTxData] = useState<Transaction[]>();
 
