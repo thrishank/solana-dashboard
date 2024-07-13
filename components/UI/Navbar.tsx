@@ -3,10 +3,11 @@ import { SearchIcon } from "lucide-react";
 import { Button } from "../button";
 import { Input } from "../input";
 import Link from "next/link";
+import { ModeToggle } from "../theme-button";
 
 export default function Navbar() {
   return (
-    <header className="bg-[#fff] py-4 px-6 border-b border-[#e5e5e5] shadow-md">
+    <header className="bg-[#fff] dark:bg-[#1E1E1E] py-4 px-6 border-b border-[#e5e5e5] dark:border-[#282828] shadow-md">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h1>
@@ -41,15 +42,7 @@ export default function Navbar() {
               className="bg-[#f3f4f6] rounded-md pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:border-[#6366f1]"
             />
           </div>
-          <Button variant="ghost" size="icon" className="rounded-full">
-            <img
-              src="/placeholder-user.jpg"
-              width={32}
-              height={32}
-              className="rounded-full"
-              alt="Avatar"
-            />
-          </Button>
+          <ModeToggle />
         </div>
       </div>
     </header>

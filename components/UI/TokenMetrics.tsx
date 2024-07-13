@@ -104,7 +104,7 @@ export default function Token(): JSX.Element {
     <div>
       <Card className="shadow-lg rounded-lg">
         <CardHeader className="flex items-center justify-between">
-          <CardTitle className="text-[#374151] font-bold">
+          <CardTitle className="text-[#374151] dark:text-[#FFFFFF] font-bold">
             Token Metrics
           </CardTitle>
           <ActivityIcon className="w-6 h-6 text-[#6b7280]" />
@@ -141,9 +141,9 @@ interface ComponentProps {
 
 function Component({ count, name }: ComponentProps): JSX.Element {
   return (
-    <div className="flex flex-col items-start gap-1">
-      <div className="text-[#6b7280]">{name}</div>
-      <div className="font-bold text-[#374151]  text-sm sm:text-2xl">
+    <div className="flex flex-col items-start gap-1 ">
+      <div className="text-[#6b7280] dark:text-[#B0B0B0]">{name}</div>
+      <div className="font-bold text-[#374151] dark:text-[#B0B0B0] text-sm sm:text-2xl">
         {count}
       </div>
     </div>

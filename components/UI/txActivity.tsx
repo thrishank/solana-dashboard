@@ -61,7 +61,7 @@ export default function TransactionActivity() {
   return (
     <Card className="shadow-lg rounded-lg">
       <CardHeader className="flex items-center justify-between">
-        <CardTitle className="text-[#374151] font-bold">
+        <CardTitle className="text-[#374151] font-bold dark:text-[#FFFFFF]">
           Transaction Activity
         </CardTitle>
         <ActivityIcon className="w-6 h-6 text-[#6b7280]" />
