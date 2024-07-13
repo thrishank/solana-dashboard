@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h1>
-            <Link href="#" className="text-2xl font-bold text-[#6366f1]">
+            <Link href="/" className="text-2xl font-bold text-[#6366f1]">
               Solana Explorer
             </Link>
           </h1>
