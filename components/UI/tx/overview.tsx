@@ -48,7 +48,7 @@ export default function Overview({
             <div>
               <p className="font-medium">Signature</p>
               <p className="flex items-center space-x-2">
-                <span>{short(data.transaction.signatures[0])}</span>
+                <span>{short(data.transaction.signatures[0] , 10)}</span>
                 <CopyIcon
                   className="h-4 w-4 text-gray-500 cursor-pointer"
                   onClick={() =>

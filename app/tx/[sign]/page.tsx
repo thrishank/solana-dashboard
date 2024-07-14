@@ -1,7 +1,4 @@
 "use client";
-
-import { Input } from "@/components/input";
-
 import Accounts from "@/components/UI/tx/accounts";
 import Overview from "@/components/UI/tx/overview";
 import { connect } from "@/lib/connect";

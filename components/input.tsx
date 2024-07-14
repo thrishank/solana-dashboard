@@ -24,7 +24,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           router.push(`/address/${value}`);
           setValue("");
         } catch (err) {
-          // If it's not a valid public key, assume it's a transaction ID
+          
           router.push(`/tx/${value}`);
           setValue("");
         }

@@ -1,6 +1,6 @@
 import { SearchIcon } from "lucide-react";
 
-import { Button } from "../button";
+
 import { Input } from "../input";
 import Link from "next/link";
 import { ModeToggle } from "../theme-button";
@@ -22,7 +22,7 @@ export default function Navbar() {
             <Link href="/address" className="hover:text-[#374151]">
               <div>Accounts</div>
             </Link>
-            <Link href="/blocks" className="hover:text-[#374151]">
+            <Link href="/block" className="hover:text-[#374151]">
               Blocks
             </Link>
           </nav>
