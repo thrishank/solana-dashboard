@@ -23,7 +23,7 @@ export default function Accounts({
   const accountKeys = data.transaction.message.staticAccountKeys.map((item) => {
     return item.toString();
   });
-  console.log(data);
+ 
   const preBalance = data.meta?.preBalances;
   const postBalance = data.meta?.postBalances;
 

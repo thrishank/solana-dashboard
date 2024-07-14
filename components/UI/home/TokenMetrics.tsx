@@ -2,8 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { ActivityIcon } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/HomeCard";
-import { connect } from "@/lib/connect";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/HomeCard";
+import { getConnection } from "@/lib/connect";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import axios from "axios";
 
@@ -29,7 +34,7 @@ async function getData(): Promise<TokenData> {
   const formatter = new Intl.NumberFormat("en", { notation: "compact" });
 
   try {
-    const supply = await connect.getSupply();
+    const supply = await getConnection().getSupply();
 
     const circulatingSupply = formatter.format(
       supply.value.circulating / LAMPORTS_PER_SOL

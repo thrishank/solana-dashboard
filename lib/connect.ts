@@ -1,7 +1,19 @@
 import { clusterApiUrl, Connection } from "@solana/web3.js";
+import { useNetworkStore } from "./network";
 
-// export const connect = new Connection("http://127.0.0.1:8899");
-export const connect = new Connection(clusterApiUrl("devnet"))
+let connectionInstance: Connection | null = null;
+
+export function getConnection(): Connection {
+    const currentNetwork = useNetworkStore.getState().network;
+
+    if (!connectionInstance || connectionInstance.rpcEndpoint !== clusterApiUrl(currentNetwork)) {
+        connectionInstance = new Connection(clusterApiUrl(currentNetwork));
+    }
+
+    return connectionInstance;
+}
+
+export const connect = new Connection(clusterApiUrl("devnet"));
 
 export function short(str: string, x?: number): string {
     const length = str.length;

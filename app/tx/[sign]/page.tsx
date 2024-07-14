@@ -1,7 +1,7 @@
 "use client";
 import Accounts from "@/components/UI/tx/accounts";
 import Overview from "@/components/UI/tx/overview";
-import { connect } from "@/lib/connect";
+import { getConnection } from "@/lib/connect";
 
 import { VersionedTransactionResponse } from "@solana/web3.js";
 
@@ -13,7 +13,7 @@ export default function Page({ params }: any) {
     useState<VersionedTransactionResponse | null>();
 
   const fetchData = async () => {
-    const data = await connect.getTransaction(sign, {
+    const data = await getConnection().getTransaction(sign, {
       commitment: "confirmed",
       maxSupportedTransactionVersion: 0,
     });

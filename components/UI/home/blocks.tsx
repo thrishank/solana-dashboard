@@ -16,7 +16,7 @@ import {
 } from "@/components/table";
 import React, { useEffect, useState } from "react";
 import { ClipboardCopy } from "lucide-react";
-import { connect } from "@/lib/connect";
+import { connect, getConnection } from "@/lib/connect";
 import Link from "next/link";
 
 interface BlockData {
@@ -37,9 +37,9 @@ const BlocksTable: React.FC = () => {
 
   const fetchBlocks = async () => {
     try {
-      const latestBlockHeight = await connect.getBlockHeight();
+      const latestBlockHeight = await getConnection().getBlockHeight();
       const blockPromises = Array.from({ length: 5 }, (_, i) =>
-        connect.getBlock(latestBlockHeight - i, {
+        getConnection().getBlock(latestBlockHeight - i, {
           maxSupportedTransactionVersion: 0,
         })
       );

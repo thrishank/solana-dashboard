@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-import { connect, formatter, short } from "@/lib/connect";
+import { formatter, getConnection, short } from "@/lib/connect";
 import {
   Card,
   CardContent,
@@ -25,6 +25,7 @@ export default function RecentSolanaTransactions() {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
+    const connect = getConnection();
     try {
       const latestBlockhash = await connect.getLatestBlockhash();
       const block = await connect.getBlock(

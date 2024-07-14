@@ -8,8 +8,13 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/HomeCard";
-import { connect } from "@/lib/connect";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/HomeCard";
+import { getConnection } from "@/lib/connect";
 import { ActivityIcon } from "lucide-react";
 
 interface dataType {
@@ -26,7 +31,7 @@ export default function TransactionActivity() {
         setIsLoading(true);
 
         const recentPerformanceSamples =
-          await connect.getRecentPerformanceSamples(6);
+          await getConnection().getRecentPerformanceSamples(6);
 
         const currentDate = new Date();
         const formattedData = recentPerformanceSamples

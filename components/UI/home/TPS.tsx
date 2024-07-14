@@ -1,5 +1,5 @@
 "use client";
-import { connect } from "@/lib/connect";
+import { getConnection } from "@/lib/connect";
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/HomeCard";
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
@@ -9,7 +9,7 @@ export default function Charts() {
   const [networkThroughputData, setNetworkThroughputData] = useState([{}]);
 
   const fetchData = async () => {
-    const performance = await connect.getRecentPerformanceSamples(6);
+    const performance = await getConnection().getRecentPerformanceSamples(6);
     console.log(performance);
     const throughput = performance.map((sample, index) => ({
       x: `Sample ${index + 1}`,

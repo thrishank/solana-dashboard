@@ -2,9 +2,14 @@
 
 import { ActivityIcon } from "lucide-react";
 import { SYSVAR_CLOCK_PUBKEY } from "@solana/web3.js";
-import { connect } from "@/lib/connect";
+import { getConnection } from "@/lib/connect";
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/HomeCard";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/HomeCard";
 
 interface NetworkData {
   totalTransactions: string;
@@ -17,6 +22,7 @@ interface NetworkData {
 
 const getData = async (): Promise<NetworkData> => {
   const formatter = new Intl.NumberFormat("en", { notation: "standard" });
+  const connect = getConnection();
   try {
     const txCount = await connect.getTransactionCount();
     const totalTransactions = formatter.format(Number(txCount));

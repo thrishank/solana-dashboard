@@ -1,7 +1,7 @@
 "use client";
 import Overview from "@/components/UI/block/overview";
 import Account from "@/components/UI/block/transactions";
-import { connect } from "@/lib/connect";
+import {  getConnection } from "@/lib/connect";
 import { BlockResponse, GetVersionedBlockConfig } from "@solana/web3.js";
 import { useEffect, useState } from "react";
 
@@ -16,7 +16,7 @@ export default function Page({ params }: any) {
   const { num } = params;
 
   const fetchData = async () => {
-    const data = await connect.getBlock(Number(num), config);
+    const data = await getConnection().getBlock(Number(num), config);
     setBlockData(data);
   };
 
