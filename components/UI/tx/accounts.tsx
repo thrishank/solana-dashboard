@@ -43,7 +43,7 @@ export default function Accounts({
           </TableHeader>
           <TableBody>
             {data.meta?.postBalances.map((item, idx) => (
-              <TableRow>
+              <TableRow key={idx}>
                 <TableCell>{idx}</TableCell>
                 <TableCell>
                   <Link href={`/address/${accountKeys[idx]}`}>
