@@ -83,7 +83,7 @@ const BlocksTable: React.FC = () => {
           <TableHeader>
             <TableRow>
               <TableHead>Block Hash</TableHead>
-              <TableHead>Slot</TableHead>
+              <TableHead>Block</TableHead>
               <TableHead>Time</TableHead>
               <TableHead>Tx Count</TableHead>
               <TableHead>Leader</TableHead>
