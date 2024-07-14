@@ -23,10 +23,9 @@ import { Badge } from "@/components/badge";
 export default function RecentSolanaTransactions() {
   const [data, setData] = useState<any[]>();
   const [isLoading, setIsLoading] = useState(true);
- 
+
   const fetchData = async () => {
     try {
-     
       const latestBlockhash = await connect.getLatestBlockhash();
       const block = await connect.getBlock(
         latestBlockhash.lastValidBlockHeight
@@ -52,6 +51,14 @@ export default function RecentSolanaTransactions() {
     return preBalance > postBalance ? preBalance - postBalance : 0;
   };
 
+  const accountKey = (item: any) => {
+    const sender = item.transaction.message.staticAccountKeys.map(
+      (key: any) => {
+        return key.toString();
+      }
+    );
+    return sender[0];
+  };
   return (
     <Card className="shadow-lg rounded-lg">
       <CardHeader className="flex items-center justify-between">
@@ -71,6 +78,7 @@ export default function RecentSolanaTransactions() {
                 <TableHead className="text-[#6b7280]">
                   Amount (LAMPORTS)
                 </TableHead>
+                <TableHead className="text-[#6b7280]">Sender Address</TableHead>
                 <TableHead className="text-[#6b7280]">Fee</TableHead>
                 <TableHead className="text-[#6b7280]">Status</TableHead>
               </TableRow>
@@ -85,6 +93,11 @@ export default function RecentSolanaTransactions() {
                   </TableCell>
                   <TableCell>
                     {formatter.format(calculateAmount(item))}
+                  </TableCell>
+                  <TableCell>
+                    <Link href={`/address/${accountKey(item)}`}>
+                      {short(accountKey(item))}
+                    </Link>
                   </TableCell>
                   <TableCell>{formatter.format(item.meta.fee)}</TableCell>
                   {item.meta.err === null ? (

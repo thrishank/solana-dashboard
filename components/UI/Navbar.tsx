@@ -32,7 +32,7 @@ export default function Navbar() {
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6b7280]" />
             <Input
               type="text"
-              placeholder="Search for blocks, accounts, transactions, and tokens"
+              placeholder="Search for accounts, transactions, and blocks"
               className="w-full pl-12 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:border-[#6366f1]"
             />
           </div>

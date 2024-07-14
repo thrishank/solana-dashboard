@@ -6,17 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/HomeCard";
-import { ReadableTime } from "@/lib/connect";
+import { ReadableTime, short } from "@/lib/connect";
 import {
   LAMPORTS_PER_SOL,
   VersionedTransactionResponse,
 } from "@solana/web3.js";
-import {
-  Badge,
-  CopyIcon,
-  InspectionPanelIcon,
-  RefreshCwIcon,
-} from "lucide-react";
+import { CopyIcon, RefreshCwIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Overview({
@@ -53,23 +48,23 @@ export default function Overview({
             <div>
               <p className="font-medium">Signature</p>
               <p className="flex items-center space-x-2">
-                <span>{data.transaction.signatures[0].substr(0, 3)}</span>
-                <span>...</span>
-                <span>
-                  {data.transaction.signatures[0].substr(
-                    data.transaction.signatures[0].length - 3,
-                    data.transaction.signatures[0].length
-                  )}
-                </span>
-                <CopyIcon className="h-4 w-4 text-gray-500" />
+                <span>{short(data.transaction.signatures[0])}</span>
+                <CopyIcon
+                  className="h-4 w-4 text-gray-500 cursor-pointer"
+                  onClick={() =>
+                    navigator.clipboard.writeText(
+                      data.transaction.signatures[0]
+                    )
+                  }
+                />
               </p>
             </div>
             <div>
               <p className="font-medium">Result</p>
-              {data?.meta?.err ? (
-                <div className="text-red-500">Failed</div>
-              ) : (
+              {data?.meta?.err === null ? (
                 <div className="text-green-500">Success</div>
+              ) : (
+                <div className="text-red-500">Failed</div>
               )}
             </div>
             <div>

@@ -4,6 +4,7 @@ import Token from "@/components/UI/home/TokenMetrics";
 import TxActivity from "@/components/UI/home/txActivity";
 import RecentSolanaTransactions from "@/components/UI/home/recentTx";
 import SolanaPriceCard from "@/components/UI/home/solana";
+import BlocksTable from "@/components/UI/home/blocks";
 
 export default async function Home() {
   return (
@@ -16,6 +17,7 @@ export default async function Home() {
         <SolanaPriceCard />
         <RecentSolanaTransactions />
       </div>
+      <BlocksTable />
     </div>
   );
 }

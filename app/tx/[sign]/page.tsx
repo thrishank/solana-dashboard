@@ -7,7 +7,7 @@ import Overview from "@/components/UI/tx/overview";
 import { connect } from "@/lib/connect";
 
 import { VersionedTransactionResponse } from "@solana/web3.js";
-import { SearchIcon } from "lucide-react";
+
 import { useEffect, useState } from "react";
 
 export default function Page({ params }: any) {
@@ -28,7 +28,7 @@ export default function Page({ params }: any) {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white text-black">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white text-black dark:text-white dark:bg-[#121212]">
       <main className="container mx-auto px-4 py-8 flex-1">
         {transactionData && <Overview data={transactionData} />}
         {transactionData && <Accounts data={transactionData} />}

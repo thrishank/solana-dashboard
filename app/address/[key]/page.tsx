@@ -39,8 +39,8 @@ export default function Account({ params }: any) {
       });
       setTxData(response.data);
 
-      console.log(response.data);
       const data = await connect.getAccountInfo(new PublicKey(key));
+      console.log(data);
       setAccountData(data);
     } catch (error) {
       console.error("Error fetching transactions:", error);
@@ -51,33 +51,37 @@ export default function Account({ params }: any) {
     fetchData();
   }, []);
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white text-black">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white text-black dark:bg-[#121212]">
       <main className="container mx-auto px-4 py-8 flex-1">
-        <h2 className="text-2xl font-bold text-center">Accounts</h2>
-        <section className="bg-white rounded-lg shadow-sm p-6 mb-8">
+        <h2 className="text-2xl font-bold text-center dark:text-white">Accounts</h2>
+        <section className=" dark:text-white rounded-lg shadow-sm p-6 mb-8 bg-white dark:bg-[#121212]">
           <h2 className="text-xl font-semibold mb-4">Account Overview</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="bg-gray-100 rounded-lg p-4">
-              <h3 className="text-sm font-medium mb-2">Solana Balance</h3>
+            <div className="bg-gray-100 rounded-lg p-4 dark:bg-[#020817]">
+              <h3 className="text-sm font-medium mb-2">Solana Balance (SOL)</h3>
               {accountdata?.lamports && (
                 <div className="text-lg font-semibold">
                   {accountdata?.lamports / LAMPORTS_PER_SOL}
                 </div>
               )}
             </div>
-            <div className="bg-gray-100 rounded-lg p-4">
+            <div className="bg-gray-100 rounded-lg p-4 dark:bg-[#020817]">
               <h3 className="text-sm font-medium mb-2">Account Public Key</h3>
               <div className="text-lg font-semibold">
                 <code>{short(key)}</code>
               </div>
             </div>
-            <div className="bg-gray-100 rounded-lg p-4">
+            <div className="bg-gray-100 rounded-lg p-4 dark:bg-[#020817]">
               <h3 className="text-sm font-medium mb-2">Executable Status</h3>
-              <div className="text-lg font-semibold">Enabled</div>
+              {accountdata?.executable ? (
+                <div className="text-lg font-semibold">True</div>
+              ) : (
+                <div className="text-lg font-semibold">False</div>
+              )}
             </div>
           </div>
         </section>
-        <section>
+        <section className="dark:text-white">
           <h2 className="text-xl font-semibold mb-4">Transaction History</h2>
           <div className="overflow-auto">
             <Table>
@@ -95,7 +99,7 @@ export default function Account({ params }: any) {
                   <TableRow key={item.signature}>
                     <TableCell>
                       <Link href={`/tx/${item.signature}`}>
-                        {short(item.signature, 6)}
+                        {short(item.signature, 10)}
                       </Link>
                     </TableCell>
                     <TableCell>{item.slot}</TableCell>
