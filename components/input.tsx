@@ -14,15 +14,20 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     const handleSearch = () => {
       if (!value.trim()) return;
-
-      try {
-        new PublicKey(value);
-        router.push(`/address/${value}`);
+    
+      if (value.length < 10) {
+        router.push(`/block/${value}`);
         setValue("");
-      } catch (err) {
-        // If it's not a valid public key, assume it's a transaction ID
-        router.push(`/tx/${value}`);
-        setValue("");
+      } else {
+        try {
+          new PublicKey(value);
+          router.push(`/address/${value}`);
+          setValue("");
+        } catch (err) {
+          // If it's not a valid public key, assume it's a transaction ID
+          router.push(`/tx/${value}`);
+          setValue("");
+        }
       }
     };
 

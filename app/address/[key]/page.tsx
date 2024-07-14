@@ -17,6 +17,7 @@ import {
 } from "@/lib/connect";
 import { AccountInfo, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import axios from "axios";
+import { CopyIcon } from "lucide-react";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -53,7 +54,9 @@ export default function Account({ params }: any) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white text-black dark:bg-[#121212]">
       <main className="container mx-auto px-4 py-8 flex-1">
-        <h2 className="text-2xl font-bold text-center dark:text-white">Accounts</h2>
+        <h2 className="text-2xl font-bold text-center dark:text-white">
+          Accounts
+        </h2>
         <section className=" dark:text-white rounded-lg shadow-sm p-6 mb-8 bg-white dark:bg-[#121212]">
           <h2 className="text-xl font-semibold mb-4">Account Overview</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -67,8 +70,12 @@ export default function Account({ params }: any) {
             </div>
             <div className="bg-gray-100 rounded-lg p-4 dark:bg-[#020817]">
               <h3 className="text-sm font-medium mb-2">Account Public Key</h3>
-              <div className="text-lg font-semibold">
-                <code>{short(key)}</code>
+              <div className="text-lg font-semibold flex">
+                <span className="text-lg">{short(key, 12)}</span>
+                <CopyIcon
+                  className="h-5 w-5 mx-2 cursor-pointer transition-colors duration-200"
+                  onClick={() => navigator.clipboard.writeText(key)}
+                />
               </div>
             </div>
             <div className="bg-gray-100 rounded-lg p-4 dark:bg-[#020817]">
@@ -102,7 +109,9 @@ export default function Account({ params }: any) {
                         {short(item.signature, 10)}
                       </Link>
                     </TableCell>
-                    <TableCell>{item.slot}</TableCell>
+                    <TableCell>
+                      <Link href={`/block/${item.slot}`}>{item.slot}</Link>
+                    </TableCell>
                     <TableCell>
                       {getReadableTimeDifference(item.timestamp)}
                     </TableCell>

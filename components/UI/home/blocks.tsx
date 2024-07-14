@@ -101,7 +101,9 @@ const BlocksTable: React.FC = () => {
                     <ClipboardCopy className="w-4 h-4 ml-2 text-gray-400 cursor-pointer" />
                   </div>
                 </TableCell>
-                <TableCell>{block.slot}</TableCell>
+                <TableCell>
+                  <Link href={`/block/${block.slot}`}>{block.slot}</Link>
+                </TableCell>
                 <TableCell>{block.time}</TableCell>
                 <TableCell>{block.txCount}</TableCell>
                 <TableCell>
