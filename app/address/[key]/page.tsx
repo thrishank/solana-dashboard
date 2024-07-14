@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Table,
   TableBody,
@@ -50,63 +51,66 @@ export default function Account({ params }: any) {
     fetchData();
   }, []);
   return (
-    <main className="container mx-auto px-4 py-8 flex-1">
-      <section className="bg-white rounded-lg shadow-sm p-6 mb-8">
-        <h2 className="text-xl font-semibold mb-4">Account Overview</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="bg-gray-100 rounded-lg p-4">
-            <h3 className="text-sm font-medium mb-2">Solana Balance</h3>
-            {accountdata?.lamports && (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white text-black">
+      <main className="container mx-auto px-4 py-8 flex-1">
+        <h2 className="text-2xl font-bold text-center">Accounts</h2>
+        <section className="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <h2 className="text-xl font-semibold mb-4">Account Overview</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="bg-gray-100 rounded-lg p-4">
+              <h3 className="text-sm font-medium mb-2">Solana Balance</h3>
+              {accountdata?.lamports && (
+                <div className="text-lg font-semibold">
+                  {accountdata?.lamports / LAMPORTS_PER_SOL}
+                </div>
+              )}
+            </div>
+            <div className="bg-gray-100 rounded-lg p-4">
+              <h3 className="text-sm font-medium mb-2">Account Public Key</h3>
               <div className="text-lg font-semibold">
-                {accountdata?.lamports / LAMPORTS_PER_SOL}
+                <code>{short(key)}</code>
               </div>
-            )}
-          </div>
-          <div className="bg-gray-100 rounded-lg p-4">
-            <h3 className="text-sm font-medium mb-2">Account Public Key</h3>
-            <div className="text-lg font-semibold">
-              <code>{short(key)}</code>
+            </div>
+            <div className="bg-gray-100 rounded-lg p-4">
+              <h3 className="text-sm font-medium mb-2">Executable Status</h3>
+              <div className="text-lg font-semibold">Enabled</div>
             </div>
           </div>
-          <div className="bg-gray-100 rounded-lg p-4">
-            <h3 className="text-sm font-medium mb-2">Executable Status</h3>
-            <div className="text-lg font-semibold">Enabled</div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <h2 className="text-xl font-semibold mb-4">Transaction History</h2>
-        <div className="overflow-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>TRANSACTION SIGNATURE</TableHead>
-                <TableHead>BLOCK</TableHead>
-                <TableHead>AGE</TableHead>
-                <TableHead>TIMESTAMP</TableHead>
-                <TableHead>Type</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {txData?.map((item) => (
-                <TableRow key={item.signature}>
-                  <TableCell>
-                    <Link href={`/tx/${item.signature}`}>
-                      {short(item.signature, 6)}
-                    </Link>
-                  </TableCell>
-                  <TableCell>{item.slot}</TableCell>
-                  <TableCell>
-                    {getReadableTimeDifference(item.timestamp)}
-                  </TableCell>
-                  <TableCell>{ReadableTime(item.timestamp)}</TableCell>
-                  <TableCell>{item.type}</TableCell>
+        </section>
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Transaction History</h2>
+          <div className="overflow-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>TRANSACTION SIGNATURE</TableHead>
+                  <TableHead>BLOCK</TableHead>
+                  <TableHead>AGE</TableHead>
+                  <TableHead>TIMESTAMP</TableHead>
+                  <TableHead>Type</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </section>
-    </main>
+              </TableHeader>
+              <TableBody>
+                {txData?.map((item) => (
+                  <TableRow key={item.signature}>
+                    <TableCell>
+                      <Link href={`/tx/${item.signature}`}>
+                        {short(item.signature, 6)}
+                      </Link>
+                    </TableCell>
+                    <TableCell>{item.slot}</TableCell>
+                    <TableCell>
+                      {getReadableTimeDifference(item.timestamp)}
+                    </TableCell>
+                    <TableCell>{ReadableTime(item.timestamp)}</TableCell>
+                    <TableCell>{item.type}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }

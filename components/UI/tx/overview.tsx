@@ -35,7 +35,7 @@ export default function Overview({
       <Card className="mt-4">
         <CardHeader className="flex justify-between items-center">
           <CardTitle>Overview</CardTitle>
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 pt-4">
             <Button
               variant="outline"
               className="flex items-center space-x-1"
@@ -67,7 +67,7 @@ export default function Overview({
             <div>
               <p className="font-medium">Result</p>
               {data?.meta?.err ? (
-                <div className="text-red-500">Success</div>
+                <div className="text-red-500">Failed</div>
               ) : (
                 <div className="text-green-500">Success</div>
               )}

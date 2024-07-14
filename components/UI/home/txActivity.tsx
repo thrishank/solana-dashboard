@@ -8,7 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "../HomeCard";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/HomeCard";
 import { connect } from "@/lib/connect";
 import { ActivityIcon } from "lucide-react";
 

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ActivityIcon } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "../HomeCard";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/HomeCard";
 import { connect } from "@/lib/connect";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import axios from "axios";

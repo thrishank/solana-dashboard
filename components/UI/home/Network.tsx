@@ -1,10 +1,10 @@
 "use client";
 
 import { ActivityIcon } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "../HomeCard";
 import { SYSVAR_CLOCK_PUBKEY } from "@solana/web3.js";
 import { connect } from "@/lib/connect";
 import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/HomeCard";
 
 interface NetworkData {
   totalTransactions: string;

@@ -1,7 +1,7 @@
 "use client";
 import { connect } from "@/lib/connect";
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../HomeCard";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/HomeCard";
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { ActivityIcon } from "lucide-react";
 

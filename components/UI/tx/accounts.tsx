@@ -27,7 +27,7 @@ export default function Accounts({
   const postBalance = data.meta?.postBalances;
 
   return (
-    <section>
+    <section className="p-4">
       <h2 className="text-xl font-bold text-center">Accounts</h2>
       <Card className="mt-4">
         <Table>

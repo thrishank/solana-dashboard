@@ -100,3 +100,6 @@ export function ReadableTime(timestamp: number) {
 
     return formattedDate;
 }
+
+
+export const formatter = new Intl.NumberFormat("en", { notation: "standard" });

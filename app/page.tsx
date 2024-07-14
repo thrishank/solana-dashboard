@@ -1,7 +1,9 @@
-import Charts from "@/components/UI/TPS";
-import Network from "@/components/UI/Network";
-import Token from "@/components/UI/TokenMetrics";
-import TxActivity from "@/components/UI/txActivity";
+import Charts from "@/components/UI/home/TPS";
+import Network from "@/components/UI/home/Network";
+import Token from "@/components/UI/home/TokenMetrics";
+import TxActivity from "@/components/UI/home/txActivity";
+import RecentSolanaTransactions from "@/components/UI/home/recentTx";
+import SolanaPriceCard from "@/components/UI/home/solana";
 
 export default async function Home() {
   return (
@@ -11,6 +13,8 @@ export default async function Home() {
         <Token />
         <Charts />
         <TxActivity />
+        <SolanaPriceCard />
+        <RecentSolanaTransactions />
       </div>
     </div>
   );
