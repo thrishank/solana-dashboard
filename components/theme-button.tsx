@@ -5,11 +5,12 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Button } from "./button";
-import { DropdownMenu, DropdownMenuTrigger } from "./dropdown-menu";
 import {
+  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@radix-ui/react-dropdown-menu";
+  DropdownMenuTrigger,
+} from "./dropdown-menu";
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
@@ -27,7 +28,7 @@ export function ModeToggle() {
         <DropdownMenuItem onClick={() => setTheme("light")} className="p-2">
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}  className="p-2">
+        <DropdownMenuItem onClick={() => setTheme("dark")} className="p-2">
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
