@@ -16,7 +16,7 @@ import {
 } from "@/components/table";
 import React, { useEffect, useState } from "react";
 import { ClipboardCopy } from "lucide-react";
-import { connect, getConnection } from "@/lib/connect";
+import { connect, getConnection, short } from "@/lib/connect";
 import Link from "next/link";
 
 interface BlockData {
@@ -31,9 +31,7 @@ interface BlockData {
 const BlocksTable: React.FC = () => {
   const [blocks, setBlocks] = useState<BlockData[]>([]);
 
-  useEffect(() => {
-    fetchBlocks();
-  }, []);
+
 
   const fetchBlocks = async () => {
     try {
@@ -70,13 +68,18 @@ const BlocksTable: React.FC = () => {
     }
   };
 
-  const shortenHash = (hash: string) =>
-    `${hash.slice(0, 8)}...${hash.slice(-8)}`;
+  useEffect(() => {
+    fetchBlocks();
+    const interval = setInterval(fetchBlocks, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Card className="w-full">
-      <CardHeader>
-        <CardTitle>Blocks</CardTitle>
+      <CardHeader className="flex items-center justify-between">
+        <CardTitle className="text-[#374151] dark:text-white font-bold">
+          Blocks
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
@@ -96,7 +99,7 @@ const BlocksTable: React.FC = () => {
                 <TableCell className="font-medium">
                   <div className="flex items-center">
                     <span className="text-blue-500 hover:underline cursor-pointer">
-                      {shortenHash(block.blockHash)}
+                      {short(block.blockHash, 30)}
                     </span>
                     <ClipboardCopy className="w-4 h-4 ml-2 text-gray-400 cursor-pointer" />
                   </div>
@@ -110,7 +113,7 @@ const BlocksTable: React.FC = () => {
                   <div className="flex items-center">
                     <Link href={`/address/${block.leader}`}>
                       <span className="text-blue-500 hover:underline cursor-pointer">
-                        {shortenHash(block.leader)}
+                        {block.leader}
                       </span>
                     </Link>
                   </div>

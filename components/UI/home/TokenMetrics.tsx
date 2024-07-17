@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ActivityIcon } from "lucide-react";
+import { DollarSignIcon } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -112,7 +112,7 @@ export default function Token(): JSX.Element {
           <CardTitle className="text-[#374151] dark:text-[#FFFFFF] font-bold">
             Token Metrics
           </CardTitle>
-          <ActivityIcon className="w-6 h-6 text-[#6b7280]" />
+          <DollarSignIcon className="w-6 h-6 text-muted-foreground dark:text-white" />
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-4">

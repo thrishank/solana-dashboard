@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/HomeCard";
-import { ActivityIcon } from "lucide-react";
+import { CreditCardIcon } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -66,7 +66,7 @@ export default function RecentSolanaTransactions() {
         <CardTitle className="text-[#374151] dark:text-white font-bold">
           Recent Transactions
         </CardTitle>
-        <ActivityIcon className="w-6 h-6 text-[#6b7280]" />
+        <CreditCardIcon className="w-6 h-6 text-muted-foreground dark:text-white" />
       </CardHeader>
       <CardContent>
         {isLoading ? (
@@ -87,17 +87,17 @@ export default function RecentSolanaTransactions() {
             <TableBody>
               {data?.map((item, idx) => (
                 <TableRow key={idx}>
-                  <TableCell>
+                  <TableCell className="text-blue-500 hover:underline cursor-pointer">
                     <Link href={`/tx/${item.transaction.signatures[0]}`}>
-                      {short(item.transaction.signatures[0])}
+                      {short(item.transaction.signatures[0], 15)}
                     </Link>
                   </TableCell>
                   <TableCell>
                     {formatter.format(calculateAmount(item))}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-blue-500 hover:underline cursor-pointer">
                     <Link href={`/address/${accountKey(item)}`}>
-                      {short(accountKey(item))}
+                      {accountKey(item)}
                     </Link>
                   </TableCell>
                   <TableCell>{formatter.format(item.meta.fee)}</TableCell>

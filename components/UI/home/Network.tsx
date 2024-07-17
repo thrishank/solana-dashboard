@@ -1,6 +1,6 @@
 "use client";
 
-import { ActivityIcon } from "lucide-react";
+import { NetworkIcon } from "lucide-react";
 import { SYSVAR_CLOCK_PUBKEY } from "@solana/web3.js";
 import { getConnection } from "@/lib/connect";
 import { useEffect, useState } from "react";
@@ -129,7 +129,7 @@ export default function Network() {
           <CardTitle className="text-[#374151] font-bold  dark:text-[#FFFFFF]">
             Network Overview
           </CardTitle>
-          <ActivityIcon className="w-6 h-6 text-[#6b7280]" />
+          <NetworkIcon className="w-6 h-6 text-muted-foreground dark:text-white" />
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-4">
