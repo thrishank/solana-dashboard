@@ -119,7 +119,7 @@ export default function Token(): JSX.Element {
             {SOL_PRICE && (
               <Component name="SOL Price" count={`$${SOL_PRICE}`} />
             )}
-            {SOL_CAP && <Component name="Market Cap" count={SOL_CAP} />}
+            {SOL_CAP && <Component name="Market Cap (USD)" count={SOL_CAP} />}
             {circulatingSupply && (
               <Component name="Circulating Supply" count={circulatingSupply} />
             )}

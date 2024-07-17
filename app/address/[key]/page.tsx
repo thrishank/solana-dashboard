@@ -41,7 +41,6 @@ export default function Account({ params }: any) {
       setTxData(response.data);
 
       const data = await connect.getAccountInfo(new PublicKey(key));
-      console.log(data);
       setAccountData(data);
     } catch (error) {
       console.error("Error fetching transactions:", error);

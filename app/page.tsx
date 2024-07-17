@@ -24,6 +24,3 @@ export default async function Home() {
     </div>
   );
 }
-
-// health check status getHealth()
-// accounts page onAccountChange() webhook

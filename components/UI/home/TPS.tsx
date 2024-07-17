@@ -42,7 +42,7 @@ export default function Charts() {
         <CardTitle className="text-[#374151] font-bold dark:text-[#FFFFFF]">
           Network ThroughPut (TPS)
         </CardTitle>
-        <ActivityIcon className="w-6 h-6 text-[#6b7280]" />
+        <ActivityIcon className="w-6 h-6 text-[#6b7280] dark:text-white" />
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={200}>
