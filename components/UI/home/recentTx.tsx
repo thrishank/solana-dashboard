@@ -42,7 +42,7 @@ export default function RecentSolanaTransactions() {
 
   useEffect(() => {
     fetchData();
-    const timer = setInterval(fetchData, 2000);
+    const timer = setInterval(fetchData, 4000);
     return () => clearInterval(timer);
   }, []);
 
@@ -61,9 +61,9 @@ export default function RecentSolanaTransactions() {
     return sender[0];
   };
   return (
-    <Card className="shadow-lg rounded-lg">
+    <Card className="shadow-lg rounded-lg w-full lg:w-2/3">
       <CardHeader className="flex items-center justify-between">
-        <CardTitle className="text-[#374151] font-bold">
+        <CardTitle className="text-[#374151] dark:text-white font-bold">
           Recent Transactions
         </CardTitle>
         <ActivityIcon className="w-6 h-6 text-[#6b7280]" />

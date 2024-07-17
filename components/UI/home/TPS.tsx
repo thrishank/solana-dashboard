@@ -1,8 +1,20 @@
 "use client";
 import { getConnection } from "@/lib/connect";
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/HomeCard";
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/HomeCard";
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { ActivityIcon } from "lucide-react";
 
 export default function Charts() {
@@ -33,10 +45,10 @@ export default function Charts() {
         <ActivityIcon className="w-6 h-6 text-[#6b7280]" />
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={250}>
+        <ResponsiveContainer width="100%" height={200}>
           <LineChart data={networkThroughputData}>
-            <XAxis />
-            <Tooltip />
+          <XAxis dataKey="x" axisLine={true} tick={false} />
+            <YAxis />
             <Line
               type="monotone"
               dataKey="y"

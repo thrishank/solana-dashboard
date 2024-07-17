@@ -1,23 +1,24 @@
 "use client";
 import Overview from "@/components/UI/block/overview";
 import Account from "@/components/UI/block/transactions";
-import {  getConnection } from "@/lib/connect";
-import { BlockResponse, GetVersionedBlockConfig } from "@solana/web3.js";
+import { getConnection } from "@/lib/connect";
+import { BlockResponse } from "@solana/web3.js";
 import { useEffect, useState } from "react";
 
-const config: GetVersionedBlockConfig = {
-  maxSupportedTransactionVersion: 0,
-  rewards: true,
-  commitment: "confirmed",
-};
 export default function Page({ params }: any) {
   const [blockData, setBlockData] = useState<BlockResponse | null>(null);
 
   const { num } = params;
 
   const fetchData = async () => {
-    const data = await getConnection().getBlock(Number(num), config);
+    const data = await getConnection().getBlock(Number(num), {
+      maxSupportedTransactionVersion: 0,
+      rewards: true,
+      commitment: "confirmed",
+    });
+    // @ts-ignore
     setBlockData(data);
+    console.log(data);
   };
 
   useEffect(() => {

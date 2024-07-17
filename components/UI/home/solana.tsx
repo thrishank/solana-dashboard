@@ -78,9 +78,9 @@ const SolanaPriceCard: React.FC = () => {
   };
 
   return (
-    <Card className="shadow-lg rounded-lg">
+    <Card className="shadow-lg rounded-lg w-full lg:w-1/3">
       <CardHeader className="flex items-center justify-between">
-        <CardTitle className="text-[#374151] font-bold">
+        <CardTitle className="text-[#374151] dark:text-white font-bold">
           Solana Price Chart
         </CardTitle>
       </CardHeader>

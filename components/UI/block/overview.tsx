@@ -8,9 +8,12 @@ import {
 import { getReadableTimeDifference, ReadableTime } from "@/lib/connect";
 import { BlockResponse } from "@solana/web3.js";
 import { CopyIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function Overview({ data }: { data: BlockResponse }) {
-    
+  let rewards = 0;
+  data?.rewards?.map((item) => (rewards += item.lamports));
+
   return (
     <section className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 text-gray-800 dark:text-white">
       <h2 className="text-3xl font-bold text-center mb-8 ">Transaction</h2>
@@ -62,14 +65,18 @@ export default function Overview({ data }: { data: BlockResponse }) {
 
             <div>
               <p className="font-medium  mb-1">Leader</p>
-              <p className=" break-all">
-                {data.rewards && data.rewards[0].pubkey}
-              </p>
+              {data.rewards && (
+                <p className=" break-all">
+                  <Link href={`/address/${data.rewards[0].pubkey}`}>
+                    {data.rewards[0].pubkey}
+                  </Link>
+                </p>
+              )}
             </div>
 
             <div>
               <p className="font-medium  mb-1">Rewards (LAMPORTS)</p>
-              <p className="">{data.rewards && data.rewards[0].lamports}</p>
+              <p className="">{data.rewards && rewards}</p>
             </div>
           </div>
         </CardContent>

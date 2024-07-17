@@ -18,6 +18,7 @@ interface NetworkData {
   blockHeight: string;
   currentTps: string;
   peakTps: string;
+  averageTps: string;
 }
 
 const getData = async (): Promise<NetworkData> => {
@@ -27,12 +28,12 @@ const getData = async (): Promise<NetworkData> => {
     const txCount = await connect.getTransactionCount();
     const totalTransactions = formatter.format(Number(txCount));
 
-    const accounts = await connect
+    const slot = await connect
       .getAccountInfoAndContext(SYSVAR_CLOCK_PUBKEY)
       .then((res) => {
         return res.context.slot;
       });
-    const totalAccounts = formatter.format(accounts);
+    const totalAccounts = formatter.format(slot);
 
     const validators = await connect.getVoteAccounts();
     const totalValidators = formatter.format(
@@ -54,6 +55,13 @@ const getData = async (): Promise<NetworkData> => {
         )
       )
     );
+
+    const averageTps = formatter.format(
+      performance.reduce((sum, sample) => {
+        return sum + sample.numTransactions / sample.samplePeriodSecs;
+      }, 0) / performance.length
+    );
+
     return {
       totalTransactions,
       totalAccounts,
@@ -61,6 +69,7 @@ const getData = async (): Promise<NetworkData> => {
       blockHeight,
       currentTps,
       peakTps,
+      averageTps
     };
   } catch (err) {
     console.error(err);
@@ -71,6 +80,7 @@ const getData = async (): Promise<NetworkData> => {
       blockHeight: "",
       currentTps: "",
       peakTps: "",
+      averageTps: ""
     };
   }
 };
@@ -109,6 +119,7 @@ export default function Network() {
     totalValidators,
     currentTps,
     peakTps,
+    averageTps
   } = data;
 
   return (
@@ -126,7 +137,7 @@ export default function Network() {
               <Component name="Total Transactions" count={totalTransactions} />
             )}
             {totalAccounts && (
-              <Component name="Total Accounts" count={totalAccounts} />
+              <Component name="Current Slot" count={totalAccounts} />
             )}
             {totalValidators && (
               <Component name="Total Validators" count={totalValidators} />
@@ -135,7 +146,7 @@ export default function Network() {
               <Component name="Block Height" count={blockHeight} />
             )}
             {currentTps && <Component name="Current TPS" count={currentTps} />}
-            {peakTps && <Component name="Peak TPS" count={peakTps} />}
+            {peakTps && <Component name="Average TPS" count={averageTps} />}
           </div>
         </CardContent>
       </Card>

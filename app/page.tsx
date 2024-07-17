@@ -13,11 +13,17 @@ export default async function Home() {
         <Network />
         <Token />
         <Charts />
-        <TxActivity />
+      </div>
+      <div className="flex flex-col lg:flex-row p-6 gap-6">
         <SolanaPriceCard />
         <RecentSolanaTransactions />
       </div>
-      <BlocksTable />
+      <div className="gap-6 p-6">
+        <BlocksTable />
+      </div>
     </div>
   );
 }
+
+// health check status getHealth()
+// accounts page onAccountChange() webhook
