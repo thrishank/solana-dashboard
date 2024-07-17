@@ -42,7 +42,7 @@ export default function RecentSolanaTransactions() {
 
   useEffect(() => {
     fetchData();
-    const timer = setInterval(fetchData, 5000);
+    const timer = setInterval(fetchData, 2000);
     return () => clearInterval(timer);
   }, []);
 

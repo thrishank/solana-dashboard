@@ -22,7 +22,10 @@ export default function Navbar() {
       <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center justify-between w-full md:w-auto mb-4 md:mb-0">
           <h1>
-            <Link href="/" className="text-2xl font-bold text-[#6366f1] whitespace-nowrap">
+            <Link
+              href="/"
+              className="text-2xl font-bold text-[#6366f1] whitespace-nowrap"
+            >
               Solana Explorer
             </Link>
           </h1>
@@ -43,7 +46,7 @@ export default function Navbar() {
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6b7280]" />
             <Input
               type="text"
-              placeholder="Search accounts, tx, blocks"
+              placeholder="Search for accounts, transactions, blocks"
               className="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:border-[#6366f1]"
             />
           </div>

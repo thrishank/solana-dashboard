@@ -28,3 +28,9 @@ npm install
 
 npm run dev
 ```
+
+## Technology Used
+
+TypeScript, NextJS, 
+ShadCN UI, TailwindCSS, 
+solana/web3.js

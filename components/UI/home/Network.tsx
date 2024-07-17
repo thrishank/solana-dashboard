@@ -93,13 +93,13 @@ export default function Network() {
 
     fetchData();
 
-    const intervalId = setInterval(fetchData, 10000); // Refresh every 10 seconds
+    const intervalId = setInterval(fetchData, 1000); // Refresh every 10 seconds
 
     return () => clearInterval(intervalId);
   }, []);
 
-  if (!data) {
-    return <div>No data available</div>;
+  if (!data || isLoading) {
+    return <div>Loading...</div>;
   }
 
   const {

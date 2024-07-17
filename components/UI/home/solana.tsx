@@ -38,7 +38,7 @@ const timeFrames = [
 ];
 
 const SolanaPriceCard: React.FC = () => {
-  const [timeFrame, setTimeFrame] = useState("1");
+  const [timeFrame, setTimeFrame] = useState("365");
   const [priceData, setPriceData] = useState<PriceData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -110,7 +110,7 @@ const SolanaPriceCard: React.FC = () => {
                       "Price",
                     ]}
                   />
-                  <Line type="monotone" dataKey="price" stroke="#8884d8" />
+                  <Line type="monotone" dataKey="price" stroke="#8884d8" dot={false}/>
                 </LineChart>
               </ResponsiveContainer>
             </div>
